@@ -1,0 +1,91 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 25,
+    "patch": 0
+  },
+  "include": [
+    "./CMakePresetsCommon.json"
+  ],
+  "configurePresets": [
+    {
+      "name": "config",
+      "hidden": true,
+      "binaryDir": "${sourceDir}/build",
+      "warnings": {
+        "dev": false
+      }
+    },
+    {
+      "name": "default",
+      "inherits": [
+        "install",
+        "config"
+      ],
+      "displayName": "Default Build Configuration"
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "default",
+      "inherits": [
+        "verbose"
+      ],
+      "displayName": "Default Build",
+      "configurePreset": "default"
+    },
+    {
+      "name": "default-install",
+      "inherits": [
+        "default",
+        "install"
+      ],
+      "displayName": "Default Build and Installation"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "default",
+      "inherits": [
+        "verbose"
+      ],
+      "displayName": "Default Test",
+      "configurePreset": "default"
+    }
+  ],
+  "workflowPresets": [
+    {
+      "name": "default",
+      "displayName": "Default Workflow",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "default"
+        },
+        {
+          "type": "build",
+          "name": "default"
+        },
+        {
+          "type": "test",
+          "name": "default"
+        }
+      ]
+    },
+    {
+      "name": "default-install",
+      "displayName": "Install Workflow",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "default"
+        },
+        {
+          "type": "build",
+          "name": "default-install"
+        }
+      ]
+    }
+  ]
+}

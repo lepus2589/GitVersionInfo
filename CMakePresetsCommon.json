@@ -1,0 +1,50 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 25,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "install",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/install"
+      }
+    },
+    {
+      "name": "ninja",
+      "hidden": true,
+      "generator": "Ninja"
+    },
+    {
+      "name": "make",
+      "hidden": true,
+      "generator": "Unix Makefiles"
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "verbose",
+      "hidden": true,
+      "verbose": true
+    },
+    {
+      "name": "install",
+      "hidden": true,
+      "targets": [
+        "install"
+      ]
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "verbose",
+      "hidden": true,
+      "output": {
+        "verbosity": "verbose"
+      }
+    }
+  ]
+}

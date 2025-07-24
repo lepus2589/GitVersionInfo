@@ -1,0 +1,42 @@
+{
+  "version": 6,
+  "include": [
+    "../../CMakePresets.json"
+  ],
+  "configurePresets": [
+    {
+      "name": "mock-default",
+      "inherits": [
+        "ninja",
+        "default"
+      ],
+      "displayName": "Mock Build Configuration"
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "mock-default",
+      "inherits": [
+        "default"
+      ],
+      "displayName": "Mock Build",
+      "configurePreset": "mock-default"
+    }
+  ],
+  "workflowPresets": [
+    {
+      "name": "mock-default",
+      "displayName": "Mock Default Workflow",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "mock-default"
+        },
+        {
+          "type": "build",
+          "name": "mock-default"
+        }
+      ]
+    }
+  ]
+}

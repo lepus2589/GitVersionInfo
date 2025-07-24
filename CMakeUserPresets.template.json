@@ -1,0 +1,99 @@
+{
+  "version": 6,
+  "include": [
+    "./CMakePresets.json"
+  ],
+  "configurePresets": [
+    {
+      "name": "user-config",
+      "hidden": true,
+      "cacheVariables": {
+      }
+    },
+    {
+      "name": "user-default",
+      "inherits": [
+        "user-config",
+        "ninja",
+        "default"
+      ],
+      "displayName": "User Build Configuration"
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "user-default",
+      "inherits": [
+        "default"
+      ],
+      "displayName": "User Build",
+      "configurePreset": "user-default"
+    },
+    {
+      "name": "user-default-install",
+      "inherits": [
+        "user-default",
+        "default-install"
+      ],
+      "displayName": "User Build and Installation"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "user-default",
+      "inherits": [
+        "default"
+      ],
+      "displayName": "User Test",
+      "configurePreset": "user-default"
+    }
+  ],
+  "workflowPresets": [
+    {
+      "name": "user-default",
+      "displayName": "User Default Workflow",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "user-default"
+        },
+        {
+          "type": "build",
+          "name": "user-default"
+        }
+      ]
+    },
+    {
+      "name": "user-install",
+      "displayName": "User Install Workflow",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "user-default"
+        },
+        {
+          "type": "build",
+          "name": "user-default-install"
+        }
+      ]
+    },
+    {
+      "name": "user-test",
+      "displayName": "User Test Workflow",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "user-default"
+        },
+        {
+          "type": "build",
+          "name": "user-default"
+        },
+        {
+          "type": "test",
+          "name": "user-default"
+        }
+      ]
+    }
+  ]
+}
