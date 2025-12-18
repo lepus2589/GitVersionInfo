@@ -23,21 +23,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ]]
 
-TEST_CASE("Expect _git_version_info_toplevel_hash() to set the _GIT_TOPLEVEL_HASH variable, if in a Git repository: ")
+TEST_CASE("Expect _git_version_info_file_names() to not set the _GIT_VERSION_INFO_STATE_FILE and _GIT_VERSION_INFO_HEAD_SHA1_FILE variables, if not in a Git repository: ")
+
+set(ENV{GIT_DIR} "not-a-git-repository")
 
 _git_version_info_set_up()
 _git_version_info_check()
-
 _git_version_info_toplevel_hash()
 
-cmake_path(HASH CMAKE_CURRENT_SOURCE_DIR _CURRENT_SOURCE_DIR_HASH_CHECK)
+_git_version_info_file_names()
 
-execute_process(
-    COMMAND "${GIT_EXECUTABLE}" rev-parse --show-toplevel
-    WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
-    OUTPUT_VARIABLE _GIT_TOPLEVEL
-    OUTPUT_STRIP_TRAILING_WHITESPACE
-)
-cmake_path(HASH _GIT_TOPLEVEL _GIT_VERSION_INFO_GIT_TOPLEVEL_HASH_CHECK)
-
-REQUIRE_STREQUAL(_GIT_VERSION_INFO_GIT_TOPLEVEL_HASH_${_CURRENT_SOURCE_DIR_HASH_CHECK} "${_GIT_VERSION_INFO_GIT_TOPLEVEL_HASH_CHECK}")
+REQUIRE_UNDEFINED(_GIT_VERSION_INFO_STATE_FILE)
+REQUIRE_UNDEFINED(_GIT_VERSION_INFO_HEAD_SHA1_FILE)

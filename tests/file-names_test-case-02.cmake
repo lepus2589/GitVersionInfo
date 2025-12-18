@@ -23,14 +23,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ]]
 
-TEST_CASE("Expect _git_version_info_toplevel_hash() to set the _GIT_TOPLEVEL_HASH variable, if in a Git repository: ")
+TEST_CASE("Expect _git_version_info_file_names() to set the _GIT_VERSION_INFO_STATE_FILE and _GIT_VERSION_INFO_HEAD_SHA1_FILE variables and create the respective files, if in a Git repository: ")
 
 _git_version_info_set_up()
 _git_version_info_check()
-
 _git_version_info_toplevel_hash()
 
-cmake_path(HASH CMAKE_CURRENT_SOURCE_DIR _CURRENT_SOURCE_DIR_HASH_CHECK)
+_git_version_info_file_names()
 
 execute_process(
     COMMAND "${GIT_EXECUTABLE}" rev-parse --show-toplevel
@@ -40,4 +39,14 @@ execute_process(
 )
 cmake_path(HASH _GIT_TOPLEVEL _GIT_VERSION_INFO_GIT_TOPLEVEL_HASH_CHECK)
 
-REQUIRE_STREQUAL(_GIT_VERSION_INFO_GIT_TOPLEVEL_HASH_${_CURRENT_SOURCE_DIR_HASH_CHECK} "${_GIT_VERSION_INFO_GIT_TOPLEVEL_HASH_CHECK}")
+if (NOT EXISTS "${CMAKE_CURRENT_BINARY_DIR}/_git_version_info_state_${_GIT_VERSION_INFO_GIT_TOPLEVEL_HASH_CHECK}.txt")
+    message(SEND_ERROR "File '${CMAKE_CURRENT_BINARY_DIR}/_git_version_info_state_${_GIT_VERSION_INFO_GIT_TOPLEVEL_HASH_CHECK}.txt' does not exist!")
+endif ()
+
+REQUIRE_STREQUAL(_GIT_VERSION_INFO_STATE_FILE "${CMAKE_CURRENT_BINARY_DIR}/_git_version_info_state_${_GIT_VERSION_INFO_GIT_TOPLEVEL_HASH_CHECK}.txt")
+
+if (NOT EXISTS "${CMAKE_CURRENT_BINARY_DIR}/_git_version_info_head_sha1_${_GIT_VERSION_INFO_GIT_TOPLEVEL_HASH_CHECK}.txt")
+    message(SEND_ERROR "File '${CMAKE_CURRENT_BINARY_DIR}/_git_version_info_head_sha1_${_GIT_VERSION_INFO_GIT_TOPLEVEL_HASH_CHECK}.txt' does not exist!")
+endif ()
+
+REQUIRE_STREQUAL(_GIT_VERSION_INFO_HEAD_SHA1_FILE "${CMAKE_CURRENT_BINARY_DIR}/_git_version_info_head_sha1_${_GIT_VERSION_INFO_GIT_TOPLEVEL_HASH_CHECK}.txt")

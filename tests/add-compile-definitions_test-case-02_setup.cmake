@@ -30,7 +30,7 @@ execute_process(
     "${CMAKE_COMMAND}"
     --workflow
     --preset mock-default
-    WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/header-test-mock-project"
+    WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/header-test-mock-project"
     RESULT_VARIABLE BUILD_STATUS_CODE_FIRST_RUN
     OUTPUT_QUIET
 )
@@ -41,6 +41,6 @@ execute_process(
     COMMAND
     "${CMAKE_COMMAND}" -E env "GIT_CONFIG_GLOBAL="
     "${GIT_EXECUTABLE}" -c "user.name=Test" -c "user.email=test@test.org" commit --allow-empty --allow-empty-message -m ""
-    WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/header-test-mock-project"
+    WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/header-test-mock-project"
     OUTPUT_QUIET
 )

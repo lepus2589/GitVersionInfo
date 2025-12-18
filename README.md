@@ -146,11 +146,13 @@ the `CMAKE_PREFIX_PATH` shouldn't be necessary.
 In the other project's package config CMake file, you can now use the module like this:
 
 ```cmake
-find_package(GitVersionInfo REQUIRED CONFIG)
 include(GitVersionInfo)
 
-git_version_info_add_dependants(target_to_rebuild)
+git_version_info_add_dependant_source_files(
+   TARGET <target_to_rebuild>
+   SOURCES <source files to rebuild>...
+)
 ```
 
-The `find_package()` command adds the GitVersionInfo module to the
-`CMAKE_MODULE_PATH` variable which enables the `include()` by name only.
+The `find_package()` command in FetchContent adds the GitVersionInfo module to
+the `CMAKE_MODULE_PATH` variable which enables the `include()` by name only.

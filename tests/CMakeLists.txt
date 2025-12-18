@@ -53,12 +53,14 @@ set(
     TEST_CASES_WITHOUT_REPOSITORY
     "check-for-git_test-case-01"
     "toplevel-hash_test-case-01"
+    "file-names_test-case-01"
 )
 
 set(
     TEST_CASES_WITH_REPOSITORY
     "check-for-git_test-case-02"
     "toplevel-hash_test-case-02"
+    "file-names_test-case-02"
     "add-dependants_test-case-01"
     "add-dependants_test-case-02"
     "add-compile-definitions_test-case-01"

@@ -27,10 +27,11 @@ TEST_CASE("Expect _git_version_info_toplevel_hash() to not set the _GIT_TOPLEVEL
 
 set(ENV{GIT_DIR} "not-a-git-repository")
 
+_git_version_info_set_up()
 _git_version_info_check()
 
 _git_version_info_toplevel_hash()
 
 cmake_path(HASH CMAKE_CURRENT_SOURCE_DIR _CURRENT_SOURCE_DIR_HASH_CHECK)
 
-REQUIRE_UNDEFINED(_GIT_TOPLEVEL_HASH_${_CURRENT_SOURCE_DIR_HASH_CHECK})
+REQUIRE_UNDEFINED(_GIT_VERSION_INFO_GIT_TOPLEVEL_HASH_${_CURRENT_SOURCE_DIR_HASH_CHECK})

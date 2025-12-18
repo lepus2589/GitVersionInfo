@@ -30,7 +30,7 @@ execute_process(
     "${CMAKE_COMMAND}"
     --workflow
     --preset mock-default
-    WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/trigger-test-mock-project"
+    WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/trigger-test-mock-project"
     RESULT_VARIABLE BUILD_STATUS_CODE_FIRST_RUN
     OUTPUT_QUIET
 )
@@ -39,12 +39,12 @@ REQUIRE_STREQUAL(BUILD_STATUS_CODE_FIRST_RUN "0")
 
 execute_process(
     COMMAND "${CMAKE_COMMAND}" -E touch "dirty.txt"
-    WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/trigger-test-mock-project"
+    WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/trigger-test-mock-project"
     OUTPUT_QUIET
 )
 
 execute_process(
     COMMAND "${GIT_EXECUTABLE}" add "dirty.txt"
-    WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/trigger-test-mock-project"
+    WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/trigger-test-mock-project"
     OUTPUT_QUIET
 )

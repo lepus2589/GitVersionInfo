@@ -23,21 +23,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ]]
 
-TEST_CASE("Expect _git_version_info_toplevel_hash() to set the _GIT_TOPLEVEL_HASH variable, if in a Git repository: ")
-
-_git_version_info_set_up()
-_git_version_info_check()
-
-_git_version_info_toplevel_hash()
-
-cmake_path(HASH CMAKE_CURRENT_SOURCE_DIR _CURRENT_SOURCE_DIR_HASH_CHECK)
+file(GLOB _FILES_TO_CLEANUP "_git_version_info_state_*.txt" "_git_version_info_head_sha1_*.txt")
 
 execute_process(
-    COMMAND "${GIT_EXECUTABLE}" rev-parse --show-toplevel
-    WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
-    OUTPUT_VARIABLE _GIT_TOPLEVEL
-    OUTPUT_STRIP_TRAILING_WHITESPACE
+    COMMAND "${CMAKE_COMMAND}" -E rm ${_FILES_TO_CLEANUP}
+    WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
+    OUTPUT_QUIET
 )
-cmake_path(HASH _GIT_TOPLEVEL _GIT_VERSION_INFO_GIT_TOPLEVEL_HASH_CHECK)
-
-REQUIRE_STREQUAL(_GIT_VERSION_INFO_GIT_TOPLEVEL_HASH_${_CURRENT_SOURCE_DIR_HASH_CHECK} "${_GIT_VERSION_INFO_GIT_TOPLEVEL_HASH_CHECK}")

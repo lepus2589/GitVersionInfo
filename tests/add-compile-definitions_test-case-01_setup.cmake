@@ -28,7 +28,7 @@ execute_process(
     "${CMAKE_COMMAND}"
     --workflow
     --preset mock-default
-    WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/header-test-mock-project"
+    WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/header-test-mock-project"
     RESULT_VARIABLE BUILD_STATUS_CODE_FIRST_RUN
     OUTPUT_QUIET
 )
