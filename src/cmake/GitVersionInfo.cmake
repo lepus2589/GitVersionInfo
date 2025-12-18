@@ -183,7 +183,6 @@ if ("${_GIT_VERSION_INFO_TRACKED_BY_GIT_${_GIT_VERSION_INFO_GIT_DIR_HASH}}")
             COMMAND "${GIT_EXECUTABLE}" describe --all --long --always --dirty
             WORKING_DIRECTORY "${_GIT_VERSION_INFO_GIT_DIR}"
             OUTPUT_FILE "${_GIT_VERSION_INFO_STATE_TMP_FILE}"
-            COMMAND_ECHO STDOUT
         )
 
         execute_process(
@@ -202,7 +201,6 @@ if ("${_GIT_VERSION_INFO_TRACKED_BY_GIT_${_GIT_VERSION_INFO_GIT_DIR_HASH}}")
             COMMAND "${GIT_EXECUTABLE}" rev-parse HEAD
             WORKING_DIRECTORY "${_GIT_VERSION_INFO_GIT_DIR}"
             OUTPUT_FILE "${_GIT_VERSION_INFO_HEAD_SHA1_TMP_FILE}"
-            COMMAND_ECHO STDOUT
         )
 
         execute_process(

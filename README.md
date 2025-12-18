@@ -123,9 +123,9 @@ include(FetchContent)
 FetchContent_Declare(
     GitVersionInfo
     GIT_REPOSITORY "https://github.com/lepus2589/GitVersionInfo.git"
-    GIT_TAG v1.0.0
+    GIT_TAG v1.1.1
     SYSTEM
-    FIND_PACKAGE_ARGS 1.0.0 CONFIG NAMES GitVersionInfo
+    FIND_PACKAGE_ARGS 1.1.1 CONFIG NAMES GitVersionInfo
 )
 set(GitVersionInfo_INCLUDE_PACKAGING TRUE)
 FetchContent_MakeAvailable(GitVersionInfo)
